@@ -10,6 +10,8 @@ const order = {
     price: 8
 };
 
+alert('>REFRESH>>>');
+
 ReactDOM.render(
   //  <HelloWorld phrase="ES6"/>,
     <CartItem title={order.title}
