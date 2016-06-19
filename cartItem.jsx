@@ -1,9 +1,13 @@
 import React from 'react';
 
-class CartItem extends React.Component {
+export default class CartItem extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props);
+        console.log(this.state);
         this.state = {
+            image: props.image,
+            title: props.title,
             qty: props.initialQty,
             total: 0
         };
@@ -12,7 +16,7 @@ class CartItem extends React.Component {
         this.recalculateTotal();
     }
     increaseQty() {
-        this.setState({qty: this.state.qty + 1}, this.recalculateTotal);
+        this.setState({qty: this.state.qty + 1, title: Math.random()*100}, this.recalculateTotal);
     }
     decreaseQty() {
         let newQty = this.state.qty > 0 ? this.state.qty - 1 : 0;
@@ -21,6 +25,39 @@ class CartItem extends React.Component {
     recalculateTotal() {
         this.setState({total: this.state.qty * this.props.price});
     }
-}
+    render() {
+       return <article className="row large-4">
+           <figure className="text-center">
+               <p>
+                   <img src={this.state.image}/>
+               </p>
+               <figcaption>
+                   <h2>{this.state.title}</h2>
+               </figcaption>
+           </figure>
+           <p className="large-4 column"><strong>Quantity: {this.state.qty}</strong></p>
 
-export default CartItem
+           <p className="large-4 column">
+               <button onClick={this.increaseQty.bind(this)} className="button success">+</button>
+               <button onClick={this.decreaseQty.bind(this)} className="button alert">-</button>
+           </p>
+
+           <p className="large-4 column"><strong>Price per item:</strong> ${this.state.price}</p>
+
+           <h3 className="large-12 column text-center">
+               Total: ${this.state.total}
+           </h3>
+
+       </article>;
+   }
+}
+CartItem.propTypes = {
+    title: React.PropTypes.string.isRequired,
+    price: React.PropTypes.number.isRequired,
+    initialQty: React.PropTypes.number
+};
+CartItem.defaultProps = {
+    title: 'Undefined Product',
+    price: 100,
+    initialQty: 0
+};

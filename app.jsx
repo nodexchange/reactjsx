@@ -1,4 +1,4 @@
-import HelloWorld from './hello';
+//import HelloWorld from './hello';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import CartItem from './cartItem';
@@ -11,7 +11,7 @@ const order = {
 };
 
 ReactDOM.render(
-    <HelloWorld phrase="ES6"/>,
+  //  <HelloWorld phrase="ES6"/>,
     <CartItem title={order.title}
       image={order.image}
       initialQty={order.initialQty}
